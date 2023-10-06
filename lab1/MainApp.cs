@@ -8,9 +8,11 @@ public class MainApp
     [STAThread]
     public static void Main()
     {
-        MyService.ClearFile(fileOfMyFoo);
-        MyService.ClearFile(fileOfAbsolute);
-        MainDialog mainDialog = new MainDialog();
-        mainDialog.ShowDialog();
+        // MyService.ClearFile(fileOfMyFoo);
+        // MyService.ClearFile(fileOfAbsolute);
+        // MainDialog mainDialog = new MainDialog();
+        // mainDialog.ShowDialog();
+        SecondDialog secondDialog = new SecondDialog();
+        secondDialog.ShowDialog();
     }
 }

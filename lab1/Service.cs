@@ -1,3 +1,5 @@
+using Exception = System.Exception;
+
 namespace lab1;
 
 public class MyService
@@ -18,6 +20,19 @@ public class MyService
         {
             fileStream.SetLength(0);
         }
-        
+    }
+
+    public static string[] ReadLinesFromFile(string filePath)
+    {
+        try
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            return lines;
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

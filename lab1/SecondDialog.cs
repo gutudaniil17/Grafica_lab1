@@ -1,14 +1,15 @@
+using System.Globalization;
+
 namespace lab1;
 
 using System;
 
-class MainDialog : Form
+class SecondDialog : Form
 {
     private const string fileOfMyFoo = "C:\\Users\\Gutu\\RiderProjects\\Grafica_lab1\\lab1\\FileOfMyFoo.txt";
-    private const string fileOfAbsolute = "C:\\Users\\Gutu\\RiderProjects\\Grafica_lab1\\lab1\\FileToCheckAbsolute.txt";
     private string[] linesFromFile = null;
 
-    public MainDialog()
+    public SecondDialog()
     {
         Text = "Dialog based application";
 
@@ -85,8 +86,13 @@ class MainDialog : Form
         SolidBrush MyBrush = new SolidBrush(MYTGCOLOR);
         SolidBrush StBrush = new SolidBrush(STTGCOLOR);
 
+
+        int k = 0;
         while (x2 < b)
         {
+            string line = linesFromFile[k];
+            k++;
+            string[] splited = line.Split("\t");
             x1 = x2;
             y1 = y2;
             ix1 = ix2;
@@ -98,13 +104,11 @@ class MainDialog : Form
             iy2 = cpy - (int)(y2 * scaley);
 
             g.DrawLine(RedPen1, ix1, iy1, ix2, iy2);
-            iy1 = cpy - (int)(Math.Log(1 - x1, Math.E) * scaley);
 
+            iy1 = cpy - (int)(Convert.ToDouble(splited[1]) * scaley);
+            
             g.DrawLine(StPen, ix1 + 0, iy1 - 2, ix1 + 0, iy1 + 2);
             g.DrawLine(StPen, ix1 + 2, iy1 + 2, ix1 + 2, iy1 + 2);
-
-            string toFile = x1 + "\t" + y1 + "\t" + y2 + "\t" + Math.Abs(y1 - y2) + "\t" + precision;
-            MyService.WriteLineToFile(toFile, fileOfAbsolute);
         }
     }
 
@@ -121,7 +125,6 @@ class MainDialog : Form
         } while (Math.Abs(t) >= eps);
 
         string toFile = x + "\t" + -sum;
-        MyService.WriteLineToFile(toFile, fileOfMyFoo);
         return -sum;
     }
 
